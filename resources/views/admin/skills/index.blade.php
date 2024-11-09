@@ -19,6 +19,7 @@
 	<table class="mb-4 p-8 w-full align-middle text-gray-300 bg-white shadow-md rounded-xl dark:bg-dark-eval-1">
 		<thead class="align-bottom">
 			<tr class="font-semibold text-[0.95rem] text-gray-500 uppercase">
+				<th class="py-3 px-6 text-start w-[10px]">No</th>
 				<th class="py-3 px-6 text-start min-w-[100px]">Skill Name</th>
 				<th class="py-3 px-6 text-end min-w-[75px]">Category</th>
 				<th class="py-3 px-6 text-end min-w-[50px]">Action</th>
@@ -27,6 +28,9 @@
 		<tbody class="divide-y-2 divide-dark-eval-3 divide-dashed">
 			@forelse ($skills as $skill)
 				<tr>
+                    <td class="py-4 px-6">
+                        <span class="font-semibold text-md/normal">{{ $loop->iteration }}</span>
+                    </td>
 					<td class="py-4 px-6">
 						<div class="flex items-center gap-3">
 							<div class="relative shrink-0 rounded-2xl">
