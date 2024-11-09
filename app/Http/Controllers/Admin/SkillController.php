@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SkillController extends Controller
 {
@@ -39,11 +40,10 @@ class SkillController extends Controller
 
         $input = $request->all();
 
-        if ($image = $request->file('icon_path')) {
-            $destinationPath = 'images/';
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $imageName);
-            $input['icon_path'] = "$imageName";
+        if ($file = $request->file('icon_path')) {
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move(public_path('/storage/skill_icons'), $filename);
+            $input['icon_path'] = "$filename";
         }
 
         Skill::create($input);
@@ -77,9 +77,8 @@ class SkillController extends Controller
         $input = $request->all();
 
         if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
             $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $imageName);
+            $image->move(public_path('/storage/skill_icons'), $imageName);
             $input['icon_path'] = "$imageName";
         } else {
             unset($input['icon_path']);
@@ -95,6 +94,10 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
+        if ($skill['file']) {
+            File::delete(public_path('storage/certificates/' . $skill['file']));
+        }
+
         $skill->delete();
         return redirect()->route('admin.skill.index')->with('success', 'Skill deleted successfully');
     }
