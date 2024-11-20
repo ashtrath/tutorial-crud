@@ -34,7 +34,7 @@
 					<td class="py-4 px-6">
 						<div class="flex items-center gap-3">
 							<div class="relative shrink-0 rounded-2xl">
-								<img src="/images/{{ $skill->icon_path }}" class="size-16 rounded-2xl" alt="{{ $skill->name }}'s Image" />
+								<img src="{{ asset('storage/skill_icons/' . $skill->icon_path) }}" class="size-16 rounded-2xl" alt="{{ $skill->name }}'s Image" />
 							</div>
 							<a class="font-semibold text-lg/normal">{{ $skill->name }}</a>
 						</div>
