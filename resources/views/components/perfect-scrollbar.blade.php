@@ -9,25 +9,28 @@
     {{ $slot }}
 </{{ $as }}>
 
-<script>
-    const perfectScroll = () => {
-        let ps
+@push('scripts')
+    <script>
+        const perfectScroll = () => {
+            let ps
 
-        const update = () => {
-            if (ps) {
-                ps.update()
+            const update = () => {
+                if (ps) {
+                    ps.update()
+                }
+            }
+
+            return {
+                init(){
+                    ps = new PerfectScrollbar(this.$el, {
+                        wheelSpeed: 2,
+                        wheelPropagation: false,
+                        minScrollbarLength: 20
+                    });
+                },
+                update
             }
         }
+    </script>
+@endpush
 
-        return {
-            init(){
-                ps = new PerfectScrollbar(this.$el, {
-                    wheelSpeed: 2,
-                    wheelPropagation: false,
-                    minScrollbarLength: 20
-                });
-            },
-            update
-        }
-    }
-</script>
