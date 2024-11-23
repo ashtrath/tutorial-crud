@@ -16,33 +16,59 @@
 		</div>
 	</x-slot>
 
-	<table class="mb-4 p-8 w-full align-middle text-gray-300 bg-white shadow-md rounded-xl dark:bg-dark-eval-1">
+	<table id="skillTable" class="mb-4 p-8 w-full align-middle">
 		<thead class="align-bottom">
-			<tr class="font-semibold text-[0.95rem] text-gray-500 uppercase">
-				<th class="py-3 px-6 text-start w-[10px]">No</th>
-				<th class="py-3 px-6 text-start min-w-[100px]">Skill Name</th>
-				<th class="py-3 px-6 text-end min-w-[75px]">Category</th>
-				<th class="py-3 px-6 text-end min-w-[50px]">Action</th>
+			<tr>
+				<th scope="col" class="text-start max-w-[10px]">
+                    <span class="inline-flex items-center">
+                        No
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        </svg>
+                    </span>
+                </th>
+				<th scope="col" class="text-start min-w-[100px]">
+                    <span class="inline-flex items-center">
+                        Name
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        </svg>
+                    </span>
+                </th>
+				<th scope="col" class="text-end min-w-[75px]">
+                    <span class="inline-flex items-center">
+                        Category
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        </svg>
+                    </span>
+                </th>
+				<th scope="col" class="text-end min-w-[50px]">
+                    <span class="inline-flex items-center">
+                        Action
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        </svg>
+                    </span>
+                </th>
 			</tr>
 		</thead>
-		<tbody class="divide-y-2 divide-dark-eval-3 divide-dashed">
+		<tbody>
 			@forelse ($skills as $skill)
 				<tr>
-                    <td class="py-4 px-6">
-                        <span class="font-semibold text-md/normal">{{ $loop->iteration }}</span>
-                    </td>
-					<td class="py-4 px-6">
+                    <td>{{ $loop->iteration }}</td>
+					<td>
 						<div class="flex items-center gap-3">
 							<div class="relative shrink-0 rounded-2xl">
 								<img src="{{ asset('storage/skill_icons/' . $skill->icon_path) }}" class="size-16 rounded-2xl" alt="{{ $skill->name }}'s Image" />
 							</div>
-							<a class="font-semibold text-lg/normal">{{ $skill->name }}</a>
+                            <span class="font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $skill->name }}
+                            </span>
 						</div>
 					</td>
-					<td class="py-4 px-6 text-end">
-						<span class="font-semibold text-md/normal">{{ $skill->category }}</span>
-					</td>
-					<td class="py-4 px-6">
+					<td class="text-end">{{ $skill->category }}</td>
+					<td>
                         <div class="inline-flex items-center justify-end w-full gap-2">
                             <x-button variant="info" size="sm" href="{{ route('admin.skill.edit', $skill) }}">Edit</x-button>
                             <x-button-delete action="{{ route('admin.skill.destroy', $skill) }}" />
@@ -51,11 +77,16 @@
 				</tr>
 			@empty
 				<tr>
-					<td colspan="3" class="py-8 px-6 text-center font-semibold text-lg/normal text-gray-500">There are no data.</td>
+					<td colspan="3" class="py-8 px-6 text-center text-gray-500">There are no data available.</td>
 				</tr>
 			@endforelse
 		</tbody>
 	</table>
 
-	{!! $skills->withQueryString()->links('pagination::tailwind') !!}
+    <script type="module">
+        let table = new DataTable('#skillTable', {
+            perPage: 5,
+            perPageSelect: [5, 10, 20, 50],
+        })
+    </script>
 </x-app-layout>
