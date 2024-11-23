@@ -43,7 +43,7 @@ class CertificateController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('file')) {
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
             $file->move(public_path('/storage/certificates'), $filename);
             $input['file'] = "$filename";
         }
@@ -85,7 +85,7 @@ class CertificateController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('file')) {
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
             $file->move(public_path('/storage/certificates'), $filename);
             $input['file'] = "$filename";
         } else {
@@ -103,7 +103,7 @@ class CertificateController extends Controller
     public function destroy(Certificate $certificate)
     {
         if ($certificate['file']) {
-            File::delete(public_path('storage/certificates/' . $certificate['file']));
+            File::delete(public_path('storage/certificates/'.$certificate['file']));
         }
 
         $certificate->delete();

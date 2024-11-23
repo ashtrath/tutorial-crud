@@ -56,6 +56,5 @@
             x-show="isSidebarOpen || isSidebarHovered"
         >
             {{ $title }}
-        </span>
-    </a>
+        </span> </a>
 @endif

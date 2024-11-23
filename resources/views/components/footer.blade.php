@@ -12,8 +12,6 @@
             href="https://github.com/ashtrath"
             target="_blank"
             class="text-blue-600 hover:underline"
-        >
-            ashtrath
-        </a>
+        > ashtrath </a>
     </p>
 </footer>

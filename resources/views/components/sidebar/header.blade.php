@@ -6,8 +6,7 @@
     >
         <x-application-logo aria-hidden="true" class="w-10 h-auto" />
 
-        <span class="sr-only">Dashboard</span>
-    </a>
+        <span class="sr-only">Dashboard</span> </a>
 
     <!-- Toggle button -->
     <x-button

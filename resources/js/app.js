@@ -4,7 +4,7 @@ import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import PerfectScrollbar from 'perfect-scrollbar'
 import Swal from 'sweetalert2'
-import { DataTable } from "simple-datatables";
+import {DataTable} from "simple-datatables";
 import 'flowbite'
 
 window.PerfectScrollbar = PerfectScrollbar

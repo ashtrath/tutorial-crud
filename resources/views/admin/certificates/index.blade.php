@@ -22,48 +22,60 @@
                 <th scope="col" class="text-start max-w-[10px]">
                     <span class="inline-flex items-center">
                         No
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
                 <th scope="col" class="text-start min-w-[100px]">
                     <span class="inline-flex items-center">
                         Name
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
                 <th scope="col" class="text-start min-w-[75px]">
                     <span class="inline-flex items-center">
                         Initiated By
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
                 <th scope="col" data-type="date" class="text-end min-w-[50px]">
                     <span class="inline-flex items-center">
                         Initiated At
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
                 <th scope="col" class="text-end min-w-[100px]">
                     <span class="inline-flex items-center">
                         File
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
                 <th scope="col" class="text-end min-w-[50px]">
                     <span class="inline-flex items-center">
                         Action
-                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                             height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                         </svg>
                     </span>
                 </th>
@@ -74,13 +86,15 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        <span class="font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{ $certificate->name }}</span>
+                        <span
+                            class="font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{ $certificate->name }}</span>
                     </td>
                     <td>{{ $certificate->initiated_by }}</td>
                     <td class="text-end">{{ $certificate->initiated_at }}</td>
                     <td class="text-end">
                         @if ($certificate->file)
-                            <x-button variant="info" size="sm" pill="true" href="{{ asset('storage/certificates/' . $certificate->file) }}" target="_blank">
+                            <x-button variant="info" size="sm" pill="true"
+                                      href="{{ asset('storage/certificates/' . $certificate->file) }}" target="_blank">
                                 View Certificate
                             </x-button>
                         @else
@@ -91,14 +105,18 @@
                     </td>
                     <td>
                         <div class="inline-flex items-center justify-end w-full gap-2">
-                            <x-button variant="info" size="sm" href="{{ route('admin.certificate.edit', $certificate) }}">Edit</x-button>
+                            <x-button variant="info" size="sm"
+                                      href="{{ route('admin.certificate.edit', $certificate) }}">Edit
+                            </x-button>
                             <x-button-delete action="{{ route('admin.certificate.destroy', $certificate) }}" />
                         </div>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="py-8 px-6 text-center font-semibold text-lg/normal text-gray-500">There are no data.</td>
+                    <td colspan="6" class="py-8 px-6 text-center font-semibold text-lg/normal text-gray-500">There are
+                        no data.
+                    </td>
                 </tr>
             @endforelse
         </tbody>

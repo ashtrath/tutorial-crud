@@ -3,10 +3,10 @@
 <!-- The most horrobile way -->
 <{{ $as }}
     x-data="perfectScroll"
-    {{ $attributes->merge(['class' => 'relative max-h-full']) }}
-    x-on:mousemove="update"
+{{ $attributes->merge(['class' => 'relative max-h-full']) }}
+x-on:mousemove="update"
 >
-    {{ $slot }}
+{{ $slot }}
 </{{ $as }}>
 
 @push('scripts')
@@ -21,7 +21,7 @@
             }
 
             return {
-                init(){
+                init() {
                     ps = new PerfectScrollbar(this.$el, {
                         wheelSpeed: 2,
                         wheelPropagation: false,

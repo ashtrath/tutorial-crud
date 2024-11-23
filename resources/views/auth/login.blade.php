@@ -63,8 +63,7 @@
 
                 <!-- Remember Me -->
                 <div class="flex items-center justify-between">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input
+                    <label for="remember_me" class="inline-flex items-center"> <input
                             id="remember_me"
                             type="checkbox"
                             class="text-purple-500 border-gray-300 rounded focus:border-purple-300 focus:ring focus:ring-purple-500 dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
@@ -73,8 +72,7 @@
 
                         <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
                             {{ __('Remember me') }}
-                        </span>
-                    </label>
+                        </span> </label>
 
                     @if (Route::has('password.request'))
                         <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">

@@ -16,7 +16,7 @@ class SkillController extends Controller
     {
         $skills = Skill::latest()->paginate(5);
         return view('admin.skills.index', compact('skills'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -41,7 +41,7 @@ class SkillController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('icon_path')) {
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
             $file->move(public_path('/storage/skill_icons'), $filename);
             $input['icon_path'] = "$filename";
         }
@@ -77,7 +77,7 @@ class SkillController extends Controller
         $input = $request->all();
 
         if ($image = $request->file('image')) {
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $imageName = date('YmdHis').".".$image->getClientOriginalExtension();
             $image->move(public_path('/storage/skill_icons'), $imageName);
             $input['icon_path'] = "$imageName";
         } else {
@@ -95,7 +95,7 @@ class SkillController extends Controller
     public function destroy(Skill $skill)
     {
         if ($skill['file']) {
-            File::delete(public_path('storage/certificates/' . $skill['file']));
+            File::delete(public_path('storage/certificates/'.$skill['file']));
         }
 
         $skill->delete();
