@@ -64,17 +64,37 @@ class CertificateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Certificate $certificate)
     {
-        //
+        return view('admin.certificates.edit', compact('certificate'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Certificate $certificate)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'initiated_by' => 'required|string|max:100',
+            'initiated_at' => 'required|date',
+            'destination' => 'nullable|string',
+            'file' => 'nullable|mimes:pdf|max:5120',
+        ]);
+
+        $input = $request->all();
+
+        if ($file = $request->file('file')) {
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move(public_path('/storage/certificates'), $filename);
+            $input['file'] = "$filename";
+        } else {
+            unset($input['file']);
+        }
+
+        $certificate->update($input);
+
+        return redirect()->route('admin.certificate.index')->with('success', 'Certificate updated successfully.');
     }
 
     /**
