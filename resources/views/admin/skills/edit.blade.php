@@ -44,27 +44,22 @@
                 </div>
                 <div class="space-y-2 flex-1">
                     <x-form.label
-                        for="inputCategory"
-                        :value="__('Category')"
+                        for="inputPercentage"
+                        :value="__('Percentage (0 - 100)')"
                     />
                     <x-form.input
-                        id="inputCategory"
-                        name="category"
-                        type="text"
-                        value="{{ $skill->category }}"
+                        id="inputPercentage"
+                        name="percent"
+                        type="number"
+                        value="{{ $skill->percent }}"
                         class="block w-full"
+                        min="0"
+                        max="100"
                         required
-                        autocomplete="category"
                     />
                     <x-form.error :messages="$errors->get('name')" />
                 </div>
             </div>
-            <x-form.file-input
-                name="icon_path"
-                label="Skill Icon"
-                validFileFormats="JPG, JPEG, PNG, SVG"
-                maxFileSizeMB="2"
-            />
             <x-button>
                 {{ __('Submit') }}
             </x-button>

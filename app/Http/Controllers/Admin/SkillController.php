@@ -33,20 +33,11 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:100',
-            'category' => 'required',
-            'icon_path' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'name' => 'required|unique:skills|max:100',
+            'percent' => 'required|numeric|between:0,100',
         ]);
 
-        $input = $request->all();
-
-        if ($file = $request->file('icon_path')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('/storage/skill_icons'), $filename);
-            $input['icon_path'] = "$filename";
-        }
-
-        Skill::create($input);
+        Skill::create($request->all());
 
         return redirect()->route('admin.skill.index')->with('success', 'Skill created successfully.');
     }
@@ -70,21 +61,11 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $request->validate([
-            'name' => 'required|max:100',
-            'category' => 'required',
+            'name' => 'required|unique:skills|max:100',
+            'percent' => 'required|numeric|between:0,100',
         ]);
 
-        $input = $request->all();
-
-        if ($image = $request->file('image')) {
-            $imageName = date('YmdHis').".".$image->getClientOriginalExtension();
-            $image->move(public_path('/storage/skill_icons'), $imageName);
-            $input['icon_path'] = "$imageName";
-        } else {
-            unset($input['icon_path']);
-        }
-
-        $skill->update($input);
+        $skill->update($request->all());
 
         return redirect()->route('admin.skill.index')->with('success', 'Skill updated successfully.');
     }
@@ -94,10 +75,6 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        if ($skill['file']) {
-            File::delete(public_path('storage/certificates/'.$skill['file']));
-        }
-
         $skill->delete();
         return redirect()->route('admin.skill.index')->with('success', 'Skill deleted successfully');
     }
