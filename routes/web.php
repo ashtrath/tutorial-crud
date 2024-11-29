@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\CertificateController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\CertificateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::resource('skill', SkillController::class);
     Route::resource('certificate', CertificateController::class);
+    Route::resource('project', ProjectController::class);
 });
 
 Route::middleware('auth')->group(function () {
