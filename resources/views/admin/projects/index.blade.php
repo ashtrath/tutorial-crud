@@ -11,7 +11,7 @@
                 class="items-center max-w-xs gap-2"
             >
                 <x-heroicon-o-plus aria-hidden="true" class="size-6" />
-                <span>Create New project</span>
+                <span>Create New Project</span>
             </x-button>
         </div>
     </x-slot>
@@ -49,7 +49,7 @@
                         </svg>
                     </span>
                 </th>
-                <th scope="col" data-type="date" class="text-end min-w-[50px]">
+                <th scope="col" class="text-end min-w-[50px]">
                     <span class="inline-flex items-center">
                         Link
                         <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -88,7 +88,7 @@
                         @if ($project->link)
                             <x-button variant="info" size="sm" pill="true"
                                       href="{{ $project->link }}" target="_blank">
-                                View project
+                                View Project
                             </x-button>
                         @else
                             <x-button variant="danger" size="sm" pill="true" disabled>
@@ -100,7 +100,7 @@
                         @if ($project->image)
                             <x-button variant="info" size="sm" pill="true"
                                       href="{{ asset('storage/projects/' . $project->image) }}" target="_blank">
-                                View image
+                                View Image
                             </x-button>
                         @else
                             <x-button variant="danger" size="sm" pill="true" disabled>
