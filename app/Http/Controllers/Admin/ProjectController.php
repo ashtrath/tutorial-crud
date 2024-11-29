@@ -23,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -31,7 +31,24 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'category' => 'required|string|max:100',
+            'link' => 'nullable|url',
+            'image' => 'required|mimes:png,jpg,jpeg,webp|max:2048',
+        ]);
+
+        $input = $request->all();
+
+        if ($file = $request->file('image')) {
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
+            $file->move(public_path('/storage/projects'), $filename);
+            $input['image'] = "$filename";
+        }
+
+        Project::create($input);
+
+        return redirect()->route('admin.project.index')->with('success', 'Project created successfully.');
     }
 
     /**
