@@ -36,7 +36,7 @@ class CertificateController extends Controller
             'name' => 'required|string|max:100',
             'initiated_by' => 'required|string|max:100',
             'initiated_at' => 'required|date',
-            'destination' => 'nullable|string',
+            'description' => 'nullable|string',
             'file' => 'nullable|mimes:pdf|max:5120',
         ]);
 
@@ -78,7 +78,7 @@ class CertificateController extends Controller
             'name' => 'required|string|max:100',
             'initiated_by' => 'required|string|max:100',
             'initiated_at' => 'required|date',
-            'destination' => 'nullable|string',
+            'description' => 'nullable|string',
             'file' => 'nullable|mimes:pdf|max:5120',
         ]);
 
