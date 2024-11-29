@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -62,24 +63,48 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'category' => 'required|string|max:100',
+            'link' => 'nullable|url',
+            'image' => 'nullable|mimes:png,jpg,jpeg,webp|max:2048',
+        ]);
+
+        $input = $request->all();
+
+        if ($file = $request->file('image')) {
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
+            $file->move(public_path('/storage/projects'), $filename);
+            $input['image'] = "$filename";
+        } else {
+            unset($input['image']);
+        }
+
+        $project->update($input);
+
+        return redirect()->route('admin.project.index')->with('success', 'Project updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        if ($project['image']) {
+            File::delete(public_path('storage/certificates/' . $project['image']));
+        }
+
+        $project->delete();
+        return redirect()->route('admin.certificate.index')->with('success', 'Project deleted successfully');
     }
 }
