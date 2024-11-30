@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\SocialLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::resource('skill', SkillController::class);
-    Route::resource('certificate', CertificateController::class);
-    Route::resource('project', ProjectController::class);
+    Route::resource('about', AboutController::class, ['except' => ['show']]);
+    Route::resource('skill', SkillController::class, ['except' => ['show']]);
+    Route::resource('certificate', CertificateController::class, ['except' => ['show']]);
+    Route::resource('project', ProjectController::class, ['except' => ['show']]);
+    Route::resource('social_link', SocialLinkController::class, ['except' => ['index', 'show']]);
 });
 
 Route::middleware('auth')->group(function () {
