@@ -3,7 +3,7 @@
         <div class="flex flex-col gap-4 md:flex-row md:items-center">
             <x-button
                 iconOnly="true"
-                href="{{ route('admin.about.index') }}"
+                href="{{ route('admin.social_link.index') }}"
                 size="sm"
                 srText="Back to Index"
             >

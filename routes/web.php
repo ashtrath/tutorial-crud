@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\GeneralController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
@@ -29,7 +29,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::resource('about', AboutController::class, ['except' => ['show']]);
+    Route::prefix('general')->name('general.')->group(function () {
+        Route::get('/', [GeneralController::class, 'index'])->name('index');
+        Route::put('/info', [GeneralController::class, 'update'])->name('update-information');
+        Route::put('/cv', [GeneralController::class, 'updateCV'])->name('update-cv');
+    });
+
     Route::resource('skill', SkillController::class, ['except' => ['show']]);
     Route::resource('certificate', CertificateController::class, ['except' => ['show']]);
     Route::resource('project', ProjectController::class, ['except' => ['show']]);

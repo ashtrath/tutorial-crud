@@ -3,7 +3,6 @@
     aria-label="main"
     class="flex flex-col flex-1 gap-4 px-3"
 >
-
     <x-sidebar.link
         title="Dashboard"
         href="{{ route('admin.dashboard') }}"
@@ -14,31 +13,6 @@
         </x-slot>
     </x-sidebar.link>
 
-    {{-- <x-sidebar.dropdown
-        title="Buttons"
-        :active="Str::startsWith(request()->route()->uri(), 'buttons')"
-    >
-        <x-slot name="icon">
-            <x-heroicon-o-view-grid class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
-        </x-slot>
-
-        <x-sidebar.sublink
-            title="Text button"
-            href="{{ route('buttons.text') }}"
-            :active="request()->routeIs('buttons.text')"
-        />
-        <x-sidebar.sublink
-            title="Icon button"
-            href="{{ route('buttons.icon') }}"
-            :active="request()->routeIs('buttons.icon')"
-        />
-        <x-sidebar.sublink
-            title="Text with icon"
-            href="{{ route('buttons.text-icon') }}"
-            :active="request()->routeIs('buttons.text-icon')"
-        />
-    </x-sidebar.dropdown> --}}
-
     <div
         x-transition
         x-show="isSidebarOpen || isSidebarHovered"
@@ -48,9 +22,9 @@
     </div>
 
     <x-sidebar.link
-        title="About"
-        href="{{ route('admin.about.index') }}"
-        :isActive="request()->routeIs('admin.about.index')"
+        title="General"
+        href="{{ route('admin.general.index') }}"
+        :isActive="request()->routeIs('admin.general.index')"
     >
         <x-slot name="icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
