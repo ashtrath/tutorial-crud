@@ -1,15 +1,22 @@
 import './bootstrap'
 
-import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
-import PerfectScrollbar from 'perfect-scrollbar'
-import Swal from 'sweetalert2'
-import {DataTable} from "simple-datatables";
+import Alpine from 'alpinejs'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import 'flowbite'
+import PerfectScrollbar from 'perfect-scrollbar'
+import { DataTable } from "simple-datatables"
+import Swal from 'sweetalert2'
 
 window.PerfectScrollbar = PerfectScrollbar
 window.Swal = Swal
 window.DataTable = DataTable
+
+//AOS animations settings
+AOS.init({
+    once: true,
+});
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('mainState', () => {
