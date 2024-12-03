@@ -14,9 +14,16 @@
 
         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg dark:bg-gray-800">
             <div class="max-w-xl">
+                @include('admin.general.partials.update-hero-image-form')
+            </div>
+        </div>
+
+        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg dark:bg-gray-800">
+            <div class="max-w-xl">
                 @include('admin.general.partials.update-cv-file-form')
             </div>
         </div>
+
 
         @include('admin.general.partials.social-links-table')
     </div>

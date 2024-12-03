@@ -28,9 +28,10 @@
                   clip-rule="evenodd" />
         </svg>
         <div class="group">
-            <label for="fileInputDragDrop"
-                   class="cursor-pointer font-medium text-black group-focus-within:underline dark:text-white"> <input
-                    id="fileInputDragDrop"
+            <label for="fileInputDragDrop_{{ $name }}"
+                   class="cursor-pointer font-medium text-black group-focus-within:underline dark:text-white">
+                   <input
+                    id="fileInputDragDrop_{{ $name }}"
                     type="file"
                     name="{{ $name }}"
                     class="sr-only"

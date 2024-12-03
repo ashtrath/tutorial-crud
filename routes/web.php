@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\SocialLinkController;
+use App\Http\Controllers\PortfolioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@ use App\Http\Controllers\Admin\SocialLinkController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PortfolioController::class, 'index']);
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
@@ -32,6 +31,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::prefix('general')->name('general.')->group(function () {
         Route::get('/', [GeneralController::class, 'index'])->name('index');
         Route::put('/info', [GeneralController::class, 'update'])->name('update-information');
+        Route::put('/image', [GeneralController::class, 'updateImage'])->name('update-image');
         Route::put('/cv', [GeneralController::class, 'updateCV'])->name('update-cv');
     });
 

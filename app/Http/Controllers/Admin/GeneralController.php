@@ -39,6 +39,29 @@ class GeneralController extends Controller
         return redirect()->route('admin.general.index')->with('success', 'General Information updated successfully.');
     }
 
+    public function updateImage(Request $request)
+    {
+        $validated = $request->validate([
+            'hero_image' => 'nullable|mimes:png,jpg,jpeg,webp|max:5120',
+        ]);
+
+        if ($file = $request->file('hero_image')) {
+            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
+            $file->move(public_path('storage/hero_images'), $filename);
+            $validated['hero_image'] = $filename;
+        }
+
+        $general = General::first();
+
+        if ($general) {
+            $general->update($validated);
+        } else {
+            return redirect()->back()->withErrors(['error' => 'General record not found.']);
+        }
+
+        return redirect()->route('admin.general.index')->with('success', 'Hero Image uploaded successfully.');
+    }
+
     public function updateCV(Request $request)
     {
         $validated = $request->validate([

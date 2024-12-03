@@ -10,6 +10,7 @@ class General extends Model
     use HasFactory;
 
     protected $fillable = [
+        'hero_image',
         'full_name',
         'job_title',
         'about',
