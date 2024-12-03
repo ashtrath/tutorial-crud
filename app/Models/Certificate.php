@@ -11,7 +11,6 @@ class Certificate extends Model
 
     protected $fillable = [
         "name",
-        "description",
         "initiated_by",
         "initiated_at",
         "description",
