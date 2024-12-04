@@ -54,13 +54,13 @@
             >
                 <div class="hero-content">
                     <span class="hero-greeting">Hello, I am</span>
-                    <h1 class="hero-heading">{{ $generals->full_name }}</h1>
-                    <span class="hero-heading-subtitle">{{ $generals->job_title }}</span>
+                    <h1 class="hero-heading">{{ $general->full_name }}</h1>
+                    <span class="hero-heading-subtitle">{{ $general->job_title }}</span>
                     <div class="about-social-list">
                         <div class="social-links-row">
-                            @foreach ($social_links as $social_link)
-                                <a href="{{ $social_link->link ?? '#!' }}">
-                                    <x-dynamic-component component="{{ $social_link->icon }}" class="text-black" />
+                            @foreach ($socialLinks as $socialLink)
+                                <a href="{{ $socialLink->link ?? '#!' }}">
+                                    <x-dynamic-component component="{{ $socialLink->icon }}" class="text-black" />
                                 </a>
                             @endforeach
                         </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="hero-img">
                     <img
-                        src="/storage/hero_images/{{ $generals->hero_image }}"
+                        src="/storage/hero_images/{{ $general->hero_image }}"
                         alt="Hero Section Image"
                     />
                 </div>
@@ -88,9 +88,9 @@
             </div>
             <div class="about-row">
                 <div class="about-content">
-                    <p class="about-descr whitespace-pre-line text-justify">{{$generals->about}}</p>
+                    <p class="about-descr whitespace-pre-line text-justify">{{$general->about}}</p>
                     <div class="about-download-btn">
-                        <a href="{{ '/storage/cv/' . $generals->cv_file ?? '#!' }}" target="_blank" class="btn btn-white">Download CV</a>
+                        <a href="{{ '/storage/cv/' . $general->cv_file ?? '#!' }}" target="_blank" class="btn btn-white">Download CV</a>
                     </div>
                 </div>
                 <div class="about-skills">
@@ -203,9 +203,9 @@
         <div class="container">
             <div class="footer-row">
                 <div class="social-links-row footer-social">
-                    @foreach ($social_links as $social_link)
-                        <a href="{{ $social_link->link ?? '#!' }}">
-                            <x-dynamic-component component="{{ $social_link->icon }}" class="text-black" />
+                    @foreach ($socialLinks as $socialLink)
+                        <a href="{{ $socialLink->link ?? '#!' }}">
+                            <x-dynamic-component component="{{ $socialLink->icon }}" class="text-black" />
                         </a>
                     @endforeach
                 </div>

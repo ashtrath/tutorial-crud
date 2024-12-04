@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Skill;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PortfolioController extends Controller
 {
@@ -16,12 +17,26 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $generals = General::first();
-        $social_links = SocialLink::all();
-        $skills = Skill::all();
-        $projects = Project::all();
-        $certificates = Certificate::all();
+        $data = Cache::remember('portfolio_data', 60, function () {
+            $general = General::first();
+            $socialLinks = SocialLink::get(['icon', 'link']);
+            $skills = Skill::get(['name', 'percent']);
+            $projects = Project::get(['name', 'category', 'link', 'image']);
+            $certificates = Certificate::get(['name', 'initiated_by', 'initiated_at', 'description', 'file']);
 
-        return view('welcome', compact('generals', 'social_links', 'skills', 'projects', 'certificates'));
+            if (!$general) {
+                abort(404, 'Couldn\'t find General Record');
+            }
+
+            return [
+                'general' => $general,
+                'socialLinks' => $socialLinks,
+                'skills' => $skills,
+                'projects' => $projects,
+                'certificates' => $certificates
+            ];
+        });
+
+        return view('welcome', $data);
     }
 }
