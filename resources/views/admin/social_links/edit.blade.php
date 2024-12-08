@@ -21,6 +21,7 @@
       </header>
       <form action="{{ route('admin.social_link.update', $social_link->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
           @csrf
+          @method('PUT')
           <div class="flex gap-4">
               <div class="space-y-2 flex-1">
                   <x-form.label
