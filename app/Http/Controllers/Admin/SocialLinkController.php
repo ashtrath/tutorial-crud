@@ -28,7 +28,7 @@ class SocialLinkController extends Controller
 
         SocialLink::create($request->all());
 
-        return redirect()->route('admin.about.index')->with('success', 'Social Link created successfully.');
+        return redirect()->route('admin.general.index')->with('success', 'Social Link created successfully.');
     }
 
     /**
@@ -36,7 +36,7 @@ class SocialLinkController extends Controller
      */
     public function edit(SocialLink $social_link)
     {
-        return view('admin.social_links.edit', compact($social_link));
+        return view('admin.social_links.edit', compact('social_link'));
     }
 
     /**
@@ -51,7 +51,7 @@ class SocialLinkController extends Controller
 
         $social_link->update($request->all());
 
-        return redirect()->route('admin.about.index')->with('success', 'Social Link updated successfully.');
+        return redirect()->route('admin.general.index')->with('success', 'Social Link updated successfully.');
     }
 
     /**
@@ -60,6 +60,6 @@ class SocialLinkController extends Controller
     public function destroy(SocialLink $social_link)
     {
         $social_link->delete();
-        return redirect()->route('admin.about.index')->with('success', 'Social Link deleted successfully');
+        return redirect()->route('admin.general.index')->with('success', 'Social Link deleted successfully');
     }
 }

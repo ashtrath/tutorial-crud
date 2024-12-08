@@ -73,7 +73,7 @@
                 </div>
                 <div class="hero-img">
                     <img
-                        src="/storage/hero_images/{{ $general->hero_image }}"
+                        src="{{ asset('storage/public/hero_images/' . $general->hero_image) }}"
                         alt="Hero Section Image"
                     />
                 </div>
@@ -90,7 +90,7 @@
                 <div class="about-content">
                     <p class="about-descr whitespace-pre-line text-justify">{{$general->about}}</p>
                     <div class="about-download-btn">
-                        <a href="{{ '/storage/cv/' . $general->cv_file ?? '#!' }}" target="_blank" class="btn btn-white">Download CV</a>
+                        <a href="{{ asset('storage/public/cv/' . $general->cv) }}" target="_blank" class="btn btn-white">Download CV</a>
                     </div>
                 </div>
                 <div class="about-skills">
@@ -119,7 +119,7 @@
                             <img
                                 class="project-img"
                                 decoding="async"
-                                src="{{ '/storage/projects/' . $project->image ?? '#!' }}"
+                                src="{{ asset('storage/public/projects/' . $project->image) ?? '#!' }}"
                             />
                             <div class="project-mask">
                                 <div class="project-caption">
@@ -142,7 +142,7 @@
 
             <div class="flex flex-wrap justify-center">
                 @foreach ($certificates as $certificate)
-                    <a href="{{ '/storage/certificates/' . $certificate->file ?? '#!' }}" target="_blank" class="bg-white shadow-md rounded-md p-8 transition-all duration-300 ease-in-out hover:shadow-sm hover:scale-95">
+                    <a href="{{ asset('storage/public/certificates/' . $certificate->file) ?? '#!' }}" target="_blank" class="bg-white shadow-md rounded-md p-8 transition-all duration-300 ease-in-out hover:shadow-sm hover:scale-95">
                         <h5 class="text-[--main-text-color] text-2xl font-bold tracking-wider mb-2">{{ $certificate->name }}</h5>
                         <div class="flex gap-2 items-center">
                             <p class="text-lg">{{ $certificate->initiated_by }}</p>

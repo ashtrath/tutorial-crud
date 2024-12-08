@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest();
+        $projects = Project::latest()->get();
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -41,22 +42,14 @@ class ProjectController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('image')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('/storage/projects'), $filename);
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->storeAs('public/projects', $filename);
             $input['image'] = "$filename";
         }
 
         Project::create($input);
 
         return redirect()->route('admin.project.index')->with('success', 'Project created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -81,12 +74,15 @@ class ProjectController extends Controller
 
         $input = $request->all();
 
-        if ($file = $request->file('image')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('/storage/projects'), $filename);
+        if ($request->hasFile('image')) {
+            if ($project->image && Storage::exists('public/projects/' . $project->image)) {
+                Storage::delete('public/projects/' . $project->image); // Use Storage facade for file deletion
+            };
+
+            $file = $request->file('image');
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->storeAs('public/projects', $filename);
             $input['image'] = "$filename";
-        } else {
-            unset($input['image']);
         }
 
         $project->update($input);
@@ -99,11 +95,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if ($project['image']) {
-            File::delete(public_path('storage/certificates/' . $project['image']));
+        if ($project->image && Storage::exists('public/projects/' . $project->image)) {
+            Storage::delete('public/projects/' . $project->image);
         }
 
         $project->delete();
-        return redirect()->route('admin.certificate.index')->with('success', 'Project deleted successfully');
+        return redirect()->route('admin.project.index')->with('success', 'Project deleted successfully');
     }
 }

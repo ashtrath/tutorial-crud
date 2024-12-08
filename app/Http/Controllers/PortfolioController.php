@@ -9,6 +9,7 @@ use App\Models\Skill;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PortfolioController extends Controller
 {
@@ -18,23 +19,25 @@ class PortfolioController extends Controller
     public function index()
     {
         $data = Cache::remember('portfolio_data', 60, function () {
-            $general = General::first();
-            $socialLinks = SocialLink::get(['icon', 'link']);
-            $skills = Skill::get(['name', 'percent']);
-            $projects = Project::get(['name', 'category', 'link', 'image']);
-            $certificates = Certificate::get(['name', 'initiated_by', 'initiated_at', 'description', 'file']);
+            return DB::transaction(function () {
+                $general = DB::table('generals')->first();
+                if (!$general) {
+                    abort(404, 'Couldn\'t find General Record');
+                }
+    
+                $socialLinks = DB::table('social_links')->select('icon', 'link')->get();
+                $skills = DB::table('skills')->select('name', 'percent')->get();
+                $projects = DB::table('projects')->select('name', 'category', 'link', 'image')->get();
+                $certificates = DB::table('certificates')->select('name', 'initiated_by', 'initiated_at', 'description', 'file')->get();
 
-            if (!$general) {
-                abort(404, 'Couldn\'t find General Record');
-            }
-
-            return [
-                'general' => $general,
-                'socialLinks' => $socialLinks,
-                'skills' => $skills,
-                'projects' => $projects,
-                'certificates' => $certificates
-            ];
+                return [
+                    'general' => $general,
+                    'socialLinks' => $socialLinks ?? [],
+                    'skills' => $skills ?? [],
+                    'projects' => $projects ?? [],
+                    'certificates' => $certificates ?? []
+                ];
+            });
         });
 
         return view('welcome', $data);

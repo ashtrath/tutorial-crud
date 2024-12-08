@@ -89,7 +89,7 @@
                     <td class="text-end">
                         @if ($certificate->file)
                             <x-button variant="info" size="sm" pill="true"
-                                      href="{{ asset('storage/certificates/' . $certificate->file) }}" target="_blank">
+                                      href="{{ asset('storage/public/certificates/' . $certificate->file) }}" target="_blank">
                                 View Certificate
                             </x-button>
                         @else

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CertificateController extends Controller
 {
@@ -14,7 +15,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::latest();
+        $certificates = Certificate::latest()->get();
         return view('admin.certificates.index', compact('certificates'));
     }
 
@@ -42,22 +43,14 @@ class CertificateController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('file')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('/storage/certificates'), $filename);
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->storeAs('public/certificates', $filename);
             $input['file'] = "$filename";
         }
 
         Certificate::create($input);
 
         return redirect()->route('admin.certificate.index')->with('success', 'Certificate created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -83,12 +76,15 @@ class CertificateController extends Controller
 
         $input = $request->all();
 
-        if ($file = $request->file('file')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('/storage/certificates'), $filename);
+        if ($request->hasFile('file')) {
+            if ($certificate->file && Storage::exists('public/projects/' . $certificate->file)) {
+                Storage::delete('public/projects/' . $certificate->file); // Use Storage facade for file deletion
+            };
+
+            $file = $request->file('file');
+            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->storeAs('public/projects', $filename);
             $input['file'] = "$filename";
-        } else {
-            unset($input['file']);
         }
 
         $certificate->update($input);
@@ -101,8 +97,8 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-        if ($certificate['file']) {
-            File::delete(public_path('storage/certificates/'.$certificate['file']));
+        if ($certificate->file && Storage::exists('public/certificates/' . $certificate->file)) {
+            Storage::delete('public/certificates/' . $certificate->file);
         }
 
         $certificate->delete();

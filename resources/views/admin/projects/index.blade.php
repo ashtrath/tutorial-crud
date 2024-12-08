@@ -99,7 +99,7 @@
                     <td class="text-end">
                         @if ($project->image)
                             <x-button variant="info" size="sm" pill="true"
-                                      href="{{ asset('storage/projects/' . $project->image) }}" target="_blank">
+                                      href="{{ asset('storage/public/projects/' . $project->image) }}" target="_blank">
                                 View Image
                             </x-button>
                         @else

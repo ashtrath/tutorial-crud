@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\General;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GeneralController extends Controller
 {
@@ -20,6 +21,9 @@ class GeneralController extends Controller
         return view('admin.general.index', compact('generals', 'social_links'));
     }
 
+    /**
+     * Update General information.
+     */
     public function update(Request $request)
     {
         $request->validate([
@@ -28,17 +32,14 @@ class GeneralController extends Controller
             'about' => 'required',
         ]);
 
-        $general = General::first();
-
-        if (!$general) {
-            General::create($request->all());
-        } else {
-            $general->update($request->all());
-        }
+        General::updateOrCreate([], $request->all());
 
         return redirect()->route('admin.general.index')->with('success', 'General Information updated successfully.');
     }
 
+    /**
+     * Handle image file uploads.
+     */
     public function updateImage(Request $request)
     {
         $validated = $request->validate([
@@ -47,21 +48,23 @@ class GeneralController extends Controller
 
         if ($file = $request->file('hero_image')) {
             $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('storage/hero_images'), $filename);
+            $file->storeAs('public/hero_images', $filename);
             $validated['hero_image'] = $filename;
         }
 
         $general = General::first();
-
-        if ($general) {
-            $general->update($validated);
-        } else {
+        if (!$general) {
             return redirect()->back()->withErrors(['error' => 'General record not found.']);
         }
+
+        $general->update($validated);
 
         return redirect()->route('admin.general.index')->with('success', 'Hero Image uploaded successfully.');
     }
 
+    /**
+     * Handle CV file uploads.
+     */
     public function updateCV(Request $request)
     {
         $validated = $request->validate([
@@ -70,19 +73,17 @@ class GeneralController extends Controller
 
         if ($file = $request->file('cv_file')) {
             $filename = date('YmdHis').".".$file->getClientOriginalExtension();
-            $file->move(public_path('storage/cv'), $filename);
+            $file->storeAs('public/cv', $filename);
             $validated['cv_file'] = $filename;
         }
 
         $general = General::first();
-
-        if ($general) {
-            $general->update($validated);
-        } else {
+        if (!$general) {
             return redirect()->back()->withErrors(['error' => 'General record not found.']);
         }
 
+        $general->update($validated);
+
         return redirect()->route('admin.general.index')->with('success', 'CV uploaded successfully.');
     }
-
 }

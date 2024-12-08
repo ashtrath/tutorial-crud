@@ -14,7 +14,7 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $skills = Skill::latest();
+        $skills = Skill::latest()->get();
         return view('admin.skills.index', compact('skills'));
     }
 
@@ -32,18 +32,13 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:skills|max:100',
+            'name' => 'required|unique:skills,name|max:100',
             'percent' => 'required|numeric|between:0,100',
         ]);
 
         Skill::create($request->all());
 
         return redirect()->route('admin.skill.index')->with('success', 'Skill created successfully.');
-    }
-
-    public function show(Skill $skill)
-    {
-        return view('admin.skill.show', compact('skill'));
     }
 
     /**
@@ -60,7 +55,7 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $request->validate([
-            'name' => 'required|unique:skills|max:100',
+            'name' => 'required|unique:skills,name|max:100',
             'percent' => 'required|numeric|between:0,100',
         ]);
 
