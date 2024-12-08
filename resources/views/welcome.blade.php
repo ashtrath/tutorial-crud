@@ -73,7 +73,7 @@
                 </div>
                 <div class="hero-img">
                     <img
-                        src="{{ asset('storage/public/hero_images/' . $general->hero_image) }}"
+                        src="{{ asset('storage/public/hero_images/' . $general->hero_image) ?? '#!' }}"
                         alt="Hero Section Image"
                     />
                 </div>
@@ -90,7 +90,7 @@
                 <div class="about-content">
                     <p class="about-descr whitespace-pre-line text-justify">{{$general->about}}</p>
                     <div class="about-download-btn">
-                        <a href="{{ asset('storage/public/cv/' . $general->cv) }}" target="_blank" class="btn btn-white">Download CV</a>
+                        <a href="{{ asset('storage/public/cv/' . $general->cv_file) ?? '#!' }}" target="_blank" class="btn btn-white">Download CV</a>
                     </div>
                 </div>
                 <div class="about-skills">
