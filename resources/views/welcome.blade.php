@@ -3,7 +3,7 @@
 
     <header 
         id="header" 
-        x-data="{ sticky: false }" 
+        x-data="{ sticky: false, isOpen: false }" 
         x-init="
             const hero = document.querySelector('#home'); 
             const triggerHeight = hero.offsetHeight - 170; 
@@ -17,7 +17,7 @@
         <div class="container container-lg">
             <div class="header-nav">
                 <a href="#home" class="logo">Ashtrath<span>.</span></a>
-                <nav id="nav" class="nav">
+                <nav id="nav" class="nav" :class="isOpen && 'open'">
                     <ul class="nav-list">
                         <li class="nav-item">
                             <a href="#home" class="nav-link active">Home</a>
@@ -35,8 +35,13 @@
                             <a href="#contact" class="nav-link">Contact</a>
                         </li>
                     </ul>
-                    <button id="nav-btn" class="nav-btn">
-                        <x-css-menu id="nav-btn-img" />
+                    <button id="nav-btn" class="nav-btn" @click="isOpen = !isOpen">
+                        <template x-if="isOpen">
+                            <x-css-close id="nav-btn-img" />
+                        </template>
+                        <template x-if="!isOpen">
+                            <x-css-menu id="nav-btn-img" />
+                        </template>
                     </button>
                 </nav>
             </div>
