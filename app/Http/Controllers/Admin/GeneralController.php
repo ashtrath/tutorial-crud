@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\General;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class GeneralController extends Controller
 {
@@ -47,13 +46,13 @@ class GeneralController extends Controller
         ]);
 
         if ($file = $request->file('hero_image')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/hero_images', $filename);
             $validated['hero_image'] = $filename;
         }
 
         $general = General::first();
-        if (!$general) {
+        if (! $general) {
             return redirect()->back()->withErrors(['error' => 'General record not found.']);
         }
 
@@ -72,13 +71,13 @@ class GeneralController extends Controller
         ]);
 
         if ($file = $request->file('cv_file')) {
-            $filename = date('YmdHis').".".$file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/cv', $filename);
             $validated['cv_file'] = $filename;
         }
 
         $general = General::first();
-        if (!$general) {
+        if (! $general) {
             return redirect()->back()->withErrors(['error' => 'General record not found.']);
         }
 

@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\GeneralController;
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\SkillController;
-use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\GeneralController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -16,6 +16,7 @@ class CertificateController extends Controller
     public function index()
     {
         $certificates = Certificate::latest()->get();
+
         return view('admin.certificates.index', compact('certificates'));
     }
 
@@ -43,7 +44,7 @@ class CertificateController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('file')) {
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/certificates', $filename);
             $input['file'] = "$filename";
         }
@@ -77,12 +78,12 @@ class CertificateController extends Controller
         $input = $request->all();
 
         if ($request->hasFile('file')) {
-            if ($certificate->file && Storage::exists('public/projects/' . $certificate->file)) {
-                Storage::delete('public/projects/' . $certificate->file); // Use Storage facade for file deletion
-            };
+            if ($certificate->file && Storage::exists('public/projects/'.$certificate->file)) {
+                Storage::delete('public/projects/'.$certificate->file); // Use Storage facade for file deletion
+            }
 
             $file = $request->file('file');
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/projects', $filename);
             $input['file'] = "$filename";
         }
@@ -97,11 +98,12 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-        if ($certificate->file && Storage::exists('public/certificates/' . $certificate->file)) {
-            Storage::delete('public/certificates/' . $certificate->file);
+        if ($certificate->file && Storage::exists('public/certificates/'.$certificate->file)) {
+            Storage::delete('public/certificates/'.$certificate->file);
         }
 
         $certificate->delete();
+
         return redirect()->route('admin.certificate.index')->with('success', 'Certificate deleted successfully');
     }
 }

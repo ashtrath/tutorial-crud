@@ -14,6 +14,6 @@ class General extends Model
         'full_name',
         'job_title',
         'about',
-        'cv_file'
+        'cv_file',
     ];
 }

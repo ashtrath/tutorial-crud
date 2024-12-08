@@ -60,6 +60,7 @@ class SocialLinkController extends Controller
     public function destroy(SocialLink $social_link)
     {
         $social_link->delete();
+
         return redirect()->route('admin.general.index')->with('success', 'Social Link deleted successfully');
     }
 }

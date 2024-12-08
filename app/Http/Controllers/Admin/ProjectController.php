@@ -16,6 +16,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::latest()->get();
+
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -42,7 +43,7 @@ class ProjectController extends Controller
         $input = $request->all();
 
         if ($file = $request->file('image')) {
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/projects', $filename);
             $input['image'] = "$filename";
         }
@@ -75,12 +76,12 @@ class ProjectController extends Controller
         $input = $request->all();
 
         if ($request->hasFile('image')) {
-            if ($project->image && Storage::exists('public/projects/' . $project->image)) {
-                Storage::delete('public/projects/' . $project->image); // Use Storage facade for file deletion
-            };
+            if ($project->image && Storage::exists('public/projects/'.$project->image)) {
+                Storage::delete('public/projects/'.$project->image); // Use Storage facade for file deletion
+            }
 
             $file = $request->file('image');
-            $filename = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/projects', $filename);
             $input['image'] = "$filename";
         }
@@ -95,11 +96,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if ($project->image && Storage::exists('public/projects/' . $project->image)) {
-            Storage::delete('public/projects/' . $project->image);
+        if ($project->image && Storage::exists('public/projects/'.$project->image)) {
+            Storage::delete('public/projects/'.$project->image);
         }
 
         $project->delete();
+
         return redirect()->route('admin.project.index')->with('success', 'Project deleted successfully');
     }
 }

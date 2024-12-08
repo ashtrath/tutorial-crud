@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class SkillController extends Controller
 {
@@ -15,6 +14,7 @@ class SkillController extends Controller
     public function index()
     {
         $skills = Skill::latest()->get();
+
         return view('admin.skills.index', compact('skills'));
     }
 
@@ -70,6 +70,7 @@ class SkillController extends Controller
     public function destroy(Skill $skill)
     {
         $skill->delete();
+
         return redirect()->route('admin.skill.index')->with('success', 'Skill deleted successfully');
     }
 }
